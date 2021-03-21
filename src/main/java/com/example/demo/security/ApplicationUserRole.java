@@ -28,7 +28,7 @@ public enum ApplicationUserRole {
     public Set<ApplicationUserPermission> getPermissions() {
         return this.permissions;
     }
-
+    
     public Set<GrantedAuthority> getGrantedAuthority() {
         Set<GrantedAuthority> permissions = getPermissions().stream()
             .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
@@ -36,5 +36,15 @@ public enum ApplicationUserRole {
         permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
 
         return permissions;
+    }
+
+    public static ApplicationUserRole getApplicationUserRole(String role) {
+        for (ApplicationUserRole userRole: ApplicationUserRole.values()) {
+            if (userRole.name().equals(role)) {
+                return userRole;
+            }
+        }
+
+        return null;
     }
 }
