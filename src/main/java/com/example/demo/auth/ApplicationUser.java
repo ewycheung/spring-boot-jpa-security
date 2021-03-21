@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
-import com.example.demo.security.ApplicationUserRole;
 import com.example.demo.security.User;
 import com.google.common.collect.Sets;
 
@@ -44,10 +43,7 @@ public class ApplicationUser implements UserDetails {
     public static ApplicationUser build(User user) {        
 		Set<GrantedAuthority> authorities = Sets.newHashSet();
         user.getRoles().forEach(role -> {
-            ApplicationUserRole userRole = ApplicationUserRole.getApplicationUserRole(role.getName().name());
-            if (userRole != null) {
-                authorities.addAll(userRole.getGrantedAuthority());
-            }
+            authorities.addAll(role.getName().getGrantedAuthority());            
         });
 
 		return new ApplicationUser(

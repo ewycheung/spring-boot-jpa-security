@@ -36,15 +36,5 @@ public enum ApplicationUserRole {
         permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
 
         return permissions;
-    }
-
-    public static ApplicationUserRole getApplicationUserRole(String role) {
-        for (ApplicationUserRole userRole: ApplicationUserRole.values()) {
-            if (userRole.name().equals(role)) {
-                return userRole;
-            }
-        }
-
-        return null;
-    }
+    }    
 }
